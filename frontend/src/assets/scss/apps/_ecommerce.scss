@@ -1,0 +1,59 @@
+$breakpoint: 1024px;
+.ul-ecommerce-toggle-button {
+    display: none;
+    @media (max-width: $breakpoint) {
+        display: flex;
+    }
+}
+.ul-ecommerce-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    @media (max-width: $breakpoint) {
+        height: 100vh;
+    }
+    .ul-ecommerce-sidebar-overlay {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: none;
+        z-index: 1;
+        &.open {
+            display: block;
+        }
+    }
+    .ul-ecommerce-sidebar {
+        width: 240px;
+        height: 100%;
+        left: 0px;
+        transition: all 0.3s ease;
+
+        @media (max-width: $breakpoint) {
+            background-color: #fff;
+            overflow-y: scroll;
+            position: absolute;
+            left: -350px;
+            z-index: 3;
+            transition: all 0.3s ease;
+            &.open {
+                left: 0;
+                transition: all 0.3s ease;
+            }
+        }
+    }
+    .ul-ecommerce-container {
+        width: calc(100% - 240px);
+        height: 100%;
+        margin-left: 2rem;
+
+        @media (max-width: $breakpoint) {
+            width: 100%;
+            margin-left: 0px;
+            overflow-y: scroll;
+        }
+    }
+}

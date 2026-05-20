@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Recurse -Directory)",
+      "Bash(Select-Object -First 50 FullName)",
+      "Bash(find \"c:\\\\\\\\Users\\\\\\\\User\\\\\\\\Documents\\\\\\\\Abilita\\\\\\\\OceanSafer\\\\\\\\Back\" -type d -maxdepth 3)",
+      "Bash(php -v)",
+      "Bash(php artisan *)",
+      "Bash(composer show *)",
+      "Bash(findstr \"versions\\\\|name\")",
+      "Bash(findstr /S /I \"array_all\" \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\Back\\\\vendor\\\\spatie\\\\laravel-permission\\\\src\")",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\Back\\\\vendor\\\\spatie\\\\laravel-permission\\\\src\" -Recurse -Filter \"*.php\")",
+      "Bash(Select-String -Pattern \"array_all\")",
+      "Bash(Select-Object Path, LineNumber, Line)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\Back\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object Name, FullName)",
+      "Bash(findstr /i \"password\")"
+    ]
+  }
+}

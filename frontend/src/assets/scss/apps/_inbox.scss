@@ -1,0 +1,89 @@
+.inbox-main-sidebar-container {
+    display: flex;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    .inbox-main-sidebar {
+        width: 180px;
+        
+        height: 100%;
+        position: relative;
+        transition: left 0.24s ease-in-out;
+        left: 0;
+        margin: 0 1rem;
+        .inbox-sidebar-close {
+            display: none;
+        }
+        @media (max-width: 1000px) {
+            position: absolute;
+            height: 100vh;
+            left: -380px;
+            transition: left 0.24s ease-in-out;
+            @apply bg-white dark:bg-dark;
+            z-index: 1;
+            .inbox-sidebar-close {
+                display: block;
+            }
+            &.open {
+                margin: 0;
+                left: 0;
+                transition: left 0.24s ease-in-out;
+            }
+        }
+    }
+    .inbox-main-content {
+        display: flex;
+        border-radius: 10px;
+        overflow: hidden;
+
+        width: calc(100% - 180px);
+        @media (max-width: 1000px) {
+            width: 100%;
+        }
+        .sidebar-content {
+            width: calc(100% - 360px);
+
+            @media (max-width: 1000px) {
+                width: 100%;
+            }
+            .inbox-topbar {
+                height: 52px;
+                @media (max-width: 1000px) {
+                    overflow-x: scroll;
+                }
+                .inbox-multi-sidebar-open {
+                    display: none;
+                    @media (max-width: 1000px) {
+                        display: block;
+                    }
+                }
+            }
+        }
+        .inbox-secondary-sidebar {
+            width: 360px;
+
+            @media (max-width: 1000px) {
+                position: absolute;
+                width: 280px;
+                height: 100vh;
+                left: -500px;
+                transition: left 0.24s ease-in-out;
+                z-index: 1;
+                
+                @apply bg-white dark:bg-dark;
+                &.open {
+                    border-radius: 10px;
+
+                    left: 0;
+                    transition: left 0.24s ease-in-out;
+                }
+            }
+            .inbox-secondary-sidebar-close {
+                display: none;
+                @media (max-width: 1000px) {
+                    display: block;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+.card-title {
+    font-size: 1.1rem;
+    @apply dark:text-gray-300
+}
+.card-header {
+    padding: 1rem 1.25rem;
+    @apply border-b dark:border-dark;
+}
