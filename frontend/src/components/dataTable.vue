@@ -77,7 +77,15 @@
                 >
                      {{ row[col.key] }}
                 </button>
-              
+
+              <span
+                v-else-if="col.badge"
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border"
+                :class="col.badgeClass ? col.badgeClass(row) : ''"
+              >
+                {{ row[col.key] }}
+              </span>
+
               <span v-else>
                 {{ row[col.key] }}
               </span>
@@ -137,14 +145,16 @@
                     </li>
                     -->
 
-                    <li v-for="item in types_actions" :key="item.type">
-                      <button
-                        @click="emitAction(item.type, row)"
-                        class="w-full text-left px-4 py-2 hover:bg-gray-100"
-                      >
-                       {{ item.label }}
-                      </button>
-                    </li>                    
+                    <template v-for="item in types_actions" :key="item.type">
+                      <li v-if="!item.condition || item.condition(row)">
+                        <button
+                          @click="emitAction(item.type, row)"
+                          class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                         {{ item.label }}
+                        </button>
+                      </li>
+                    </template>                    
                     
                   </ul>
                 </div>

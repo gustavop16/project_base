@@ -24,6 +24,14 @@ class UserService {
      );
    }
  
+   getProfile(): Promise<AxiosResponse<{ data: {} }>> {
+     return api.get<{ data: {} }>('/profile');
+   }
+
+   updateProfile(data: {}): Promise<AxiosResponse<{ data: {} }>> {
+     return api.patch<{ data: {} }>('/profile', data);
+   }
+
    update(
      id: number,
      data: {}

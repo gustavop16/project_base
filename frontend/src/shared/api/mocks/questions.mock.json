@@ -1,0 +1,174 @@
+{
+  "_description": "Mock de referência para criação dos endpoints de Perguntas",
+
+  "input_types": ["text", "select_simple", "select_multiple", "radio", "checkbox", "upload"],
+
+  "endpoints": {
+    "GET /questions": {
+      "description": "Lista todas as perguntas",
+      "response": {
+        "data": [
+          {
+            "id": 1,
+            "question": "Descreva as condições gerais observadas",
+            "description": "Forneça um relato detalhado sobre o estado geral encontrado.",
+            "score": 5,
+            "input_type": "text",
+            "options": []
+          },
+          {
+            "id": 2,
+            "question": "Qual é o estado geral do casco?",
+            "description": "Avalie a condição visual e estrutural do casco.",
+            "score": 10,
+            "input_type": "radio",
+            "options": [
+              { "id": 1, "label": "Bom",     "value": "good",    "has_text_input": false },
+              { "id": 2, "label": "Regular", "value": "regular", "has_text_input": false },
+              { "id": 3, "label": "Ruim",    "value": "bad",     "has_text_input": true  }
+            ]
+          },
+          {
+            "id": 3,
+            "question": "Qual a classe de certificação do navio?",
+            "description": "Informe a classe conforme documentação oficial.",
+            "score": 15,
+            "input_type": "select_simple",
+            "options": [
+              { "id": 1, "label": "Classe A", "value": "class_a" },
+              { "id": 2, "label": "Classe B", "value": "class_b" },
+              { "id": 3, "label": "Classe C", "value": "class_c" }
+            ]
+          },
+          {
+            "id": 4,
+            "question": "Quais áreas foram inspecionadas?",
+            "description": "Selecione todas as áreas do navio vistoriadas.",
+            "score": 20,
+            "input_type": "select_multiple",
+            "options": [
+              { "id": 1, "label": "Casco",            "value": "hull"           },
+              { "id": 2, "label": "Sala de máquinas", "value": "engine_room"    },
+              { "id": 3, "label": "Ponte de comando", "value": "bridge"         },
+              { "id": 4, "label": "Porão de carga",   "value": "cargo_hold"     },
+              { "id": 5, "label": "Alojamentos",      "value": "accommodations" }
+            ]
+          },
+          {
+            "id": 5,
+            "question": "Quais equipamentos de segurança estão disponíveis?",
+            "description": "Marque todos os equipamentos presentes a bordo.",
+            "score": 25,
+            "input_type": "checkbox",
+            "options": [
+              { "id": 1, "label": "Coletes salva-vidas",     "value": "life_jackets"       },
+              { "id": 2, "label": "Balsas infláveis",        "value": "life_rafts"          },
+              { "id": 3, "label": "Extintores de incêndio",  "value": "fire_extinguishers"  },
+              { "id": 4, "label": "Kit de primeiros socorros","value": "first_aid_kit"      }
+            ]
+          }
+        ],
+        "meta": {
+          "current_page": 1,
+          "per_page": 15,
+          "total": 5,
+          "last_page": 1
+        }
+      }
+    },
+
+    "GET /questions/{id}": {
+      "description": "Retorna uma pergunta pelo ID",
+      "response": {
+        "data": {
+          "id": 2,
+          "question": "Qual é o estado geral do casco?",
+          "description": "Avalie a condição visual e estrutural do casco.",
+          "score": 10,
+          "input_type": "radio",
+          "options": [
+            { "id": 1, "label": "Bom",     "value": "good"    },
+            { "id": 2, "label": "Regular", "value": "regular" },
+            { "id": 3, "label": "Ruim",    "value": "bad"     }
+          ]
+        }
+      }
+    },
+
+    "POST /questions": {
+      "description": "Cria uma nova pergunta. options é obrigatório para: select_simple, select_multiple, radio, checkbox",
+      "request_body": {
+        "question":   "Qual é o estado geral do casco?",
+        "description": "Avalie a condição visual e estrutural do casco.",
+        "score":      10,
+        "input_type": "radio",
+        "options": [
+          { "label": "Bom",     "value": "good"    },
+          { "label": "Regular", "value": "regular" },
+          { "label": "Ruim",    "value": "bad"     }
+        ]
+      },
+      "response": {
+        "data": {
+          "id": 6,
+          "question":   "Qual é o estado geral do casco?",
+          "description": "Avalie a condição visual e estrutural do casco.",
+          "score":      10,
+          "input_type": "radio",
+          "options": [
+            { "id": 1, "label": "Bom",     "value": "good"    },
+            { "id": 2, "label": "Regular", "value": "regular" },
+            { "id": 3, "label": "Ruim",    "value": "bad"     }
+          ]
+        }
+      }
+    },
+
+    "PUT /questions/{id}": {
+      "description": "Atualiza uma pergunta. Reenviar options substitui as opções existentes.",
+      "request_body": {
+        "question":    "Qual é o estado geral do casco?",
+        "description": "Avalie a condição visual e estrutural do casco.",
+        "score":       10,
+        "input_type":  "radio",
+        "options": [
+          { "label": "Bom",     "value": "good"    },
+          { "label": "Regular", "value": "regular" },
+          { "label": "Ruim",    "value": "bad"     }
+        ]
+      },
+      "response": {
+        "data": {
+          "id": 2,
+          "question":    "Qual é o estado geral do casco?",
+          "description": "Avalie a condição visual e estrutural do casco.",
+          "score":       10,
+          "input_type":  "radio",
+          "options": [
+            { "id": 1, "label": "Bom",     "value": "good"    },
+            { "id": 2, "label": "Regular", "value": "regular" },
+            { "id": 3, "label": "Ruim",    "value": "bad"     }
+          ]
+        }
+      }
+    },
+
+    "DELETE /questions/{id}": {
+      "description": "Remove uma pergunta e suas opções",
+      "response": {
+        "message": "Registro excluído com sucesso."
+      }
+    }
+  },
+
+  "validation_rules": {
+    "question":   "required|string|max:500",
+    "description":"nullable|string",
+    "score":      "required|integer|min:0",
+    "input_type": "required|in:text,select_simple,select_multiple,radio,checkbox",
+    "options":    "required_if:input_type,select_simple,select_multiple,radio,checkbox|array",
+    "options.*.label":          "required|string|max:255",
+    "options.*.value":          "required|string|max:255",
+    "options.*.has_text_input": "boolean"
+  }
+}

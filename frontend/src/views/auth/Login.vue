@@ -1,10 +1,10 @@
 <template>
   <div class="flex h-screen">
     <!-- Lado Esquerdo -->
-    <div class="w-1/2 bg-gradient-to-b from-blue-900 to-blue-800 text-white bg-login flex flex-col items-center justify-center px-10">
-      <img src="/images/logo/logo-white.png" alt="Logo" class="w-24 h-24 mb-6" />
-      <h1 class="text-4xl font-bold mb-2">PHOENIX CLEAN</h1>
-      <p class="text-center text-sm">A 2UP software solution for aircrafts maintenance and operations</p>
+    <div class="w-1/2 bg-gradient-to-b from-blue-900 to-blue-600 text-white bg-login flex flex-col items-center justify-center px-10">
+      <img :src="appConfig.logo.auth" alt="Logo" class="mb-6" />
+      <h1 class="text-4xl font-bold mb-2">{{ appConfig.name }}</h1>
+      <p class="text-center text-sm">{{ appConfig.description }}</p>
     </div>
 
     <!-- Lado Direito -->
@@ -43,6 +43,12 @@
           Login
         </button>
         </form>
+
+        <div class="text-center text-sm mt-4">
+          <span class="text-gray-500">Não tem conta? </span>
+          <router-link to="/register" class="text-blue-900 font-medium hover:underline">Cadastre-se</router-link>
+        </div>
+
       </div>
     </div>
   </div>
@@ -50,6 +56,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { appConfig } from '../../config/app'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../shared/store/auth'
 import { useLoadingStore } from "../../shared/store/loading";

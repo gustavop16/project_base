@@ -5,7 +5,7 @@
       :linkText ="t('labels.staff')"
       linkHref="/usuarios/usuarios"
       :showExport = false
-      :showAdd = true
+      :showAdd="can('users.create')"
       @export="exportarDados"
       @add="openModalcreate"
     />
@@ -19,8 +19,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useI18n } from 'vue-i18n'
+import { usePermissions } from '../../../shared/composables/usePermissions'
 import form from './_form.vue'
 import breadcrumb from '../../../layout/Breadcrumb.vue' 
 import dataTable  from '../../../components/dataTable.vue'
@@ -33,6 +34,7 @@ import { useDialogStore } from '../../../shared/store/dialog'
 import { getErrorMessage } from '../../../shared/utils/getErrorMessage.js'
 
 const { t } = useI18n()
+const { can } = usePermissions()
 
 const dataUsers  = ref([]);
 const dataUpdate = ref([]);
@@ -42,16 +44,16 @@ const alert = useAlertStore()
 const dialog = useDialogStore()
 
 const columns = [
-  { label: t('labels.name'),  key: 'name' },
-  { label: t('labels.email'), key: 'email' },
-  { label: t('labels.phone'), key: 'phone' },
-  { label: 'Tipo',            key: 'type' },
+  { label: t('labels.name'),   key: 'name'        },
+  { label: t('labels.email'),  key: 'email'       },
+  { label: t('labels.phone'),  key: 'phone'       },
+  { label: 'Tipo',             key: 'type'        },
 ]
 
-const types_actions = [
-  { label: t("labels.edit"),   type: "edit" },
-  { label:  t("labels.delete"), type: "remove" },
-];
+const types_actions = computed(() => [
+  { label: t("labels.edit"),   type: "edit",   permission: 'users.update' },
+  { label: t("labels.delete"), type: "remove", permission: 'users.delete' },
+].filter(a => !a.permission || can(a.permission)));
      
 const actions = {
   edit: (row) => edit(row),

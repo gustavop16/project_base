@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import { useAuthStore } from '../shared/store/auth.js'
+import { useAuthStore } from '../shared/store/auth'
 import { usePermissions } from '../shared/composables/usePermissions'
 import About from '../views/About.vue'
 import Index from '../layout/index.vue'
@@ -13,6 +13,10 @@ import placeRoutes from './routes/places'
 import productRoutes from './routes/products'
 import taskRoutes from './routes/tasks'
 import planningRoutes from './routes/plannings'
+import vesselRoutes          from './routes/vessels'
+import questionRoutes         from './routes/questions'
+import certificateFormRoutes  from './routes/certificate_forms'
+import certificateRoutes, { certificatePublicRoutes } from './routes/certificates'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -39,9 +43,14 @@ const routes: RouteRecordRaw[] = [
       ...productRoutes,
       ...taskRoutes,
       ...planningRoutes,
+      ...vesselRoutes,
+      ...questionRoutes,
+      ...certificateFormRoutes,
+      ...certificateRoutes,
     ],
   },
   ...authRoutes,
+  ...certificatePublicRoutes,
 ]
 
 const router = createRouter({

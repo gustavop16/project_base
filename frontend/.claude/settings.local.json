@@ -3,7 +3,21 @@
     "allow": [
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\Front\")",
       "Bash(Select-Object Name, PSIsContainer)",
-      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\Front\\\\src\\\\components\" -Filter \"*[Uu]ser*\" -Recurse)"
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\Front\\\\src\\\\components\" -Filter \"*[Uu]ser*\" -Recurse)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\frontend\" -Force)",
+      "Bash(Select-Object Name, FullName)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\frontend\" -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)",
+      "Bash(findstr /E \"env.*$\")",
+      "Bash(dir /B *.env*)",
+      "Bash(dir /s /b c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\frontend\\\\tailwind.config.*)",
+      "Bash(findstr /E \"\\\\.\\(env|js|ts|json\\)$\")",
+      "Bash(npm run *)",
+      "Bash(npx vue-tsc *)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\User\\Documents\\Abilita\\OceanSafer\\backend\\resources\\views\\pdf"
     ]
   }
 }

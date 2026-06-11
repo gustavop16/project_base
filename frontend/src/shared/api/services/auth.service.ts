@@ -13,6 +13,10 @@ class authService {
     localStorage.removeItem('token');
   }
 
+  register(name: string, email: string, password: string, password_confirmation: string): Promise<AxiosResponse> {
+    return api.post(`/register`, { name, email, password, password_confirmation });
+  }
+
   forgotPassword(email: string): Promise<AxiosResponse> {
     return api.post(`/forgot-password`, { email });
   }

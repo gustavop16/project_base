@@ -2,17 +2,27 @@
   <header class="fixed top-0 left-0 w-full h-16 bg-primary shadow-md z-50 flex items-center justify-between px-4">
     <!-- Logo -->
     <div class="text-xl font-bold text-gray-800">
-      <img src="/images/logo/logo-pca.png" class="h-px-5" alt="" height="40" width="40">
+      <img :src="appConfig.logo.header" class="h-px-5" :alt="appConfig.name" width="50">
     </div>
 
     <!-- User profile -->
     <div class="relative">
       <button @click="toggleDropdown" class="flex items-center space-x-2 focus:outline-none">
         <img
+          v-if="user_photo"
           class="w-10 h-10 rounded-full object-cover border-2 border-gray-300"
           :src="user_photo"
           :alt="user_name"
+          @error="user_photo = null"
         />
+        <span
+          v-else
+          class="w-10 h-10 rounded-full border-2 border-gray-300 bg-gray-200 flex items-center justify-center"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+          </svg>
+        </span>
       </button>
 
       <!-- Dropdown -->
@@ -50,19 +60,23 @@
 
 <script setup>
 import { useI18n } from "vue-i18n";
+import { appConfig } from '../config/app'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useAuthStore } from './../shared/store/auth'
 import { useRouter } from 'vue-router'
 import { useLoadingStore } from "./../shared/store/loading";
 import { useModalStore } from './../shared/store/modal'
+import { useAlertStore } from './../shared/store/alert'
 import userService from "./../shared/api/services/user.service";
+import { getErrorMessage } from './../shared/utils/getErrorMessage.js'
 import form from './../views/users/staff/_form.vue'
 import passwordForm from './../views/users/account/password.vue'
 
 const { t } = useI18n();
-const modal = useModalStore();
-const router = useRouter()
-const auth = useAuthStore()
+const modal   = useModalStore();
+const alert   = useAlertStore();
+const router  = useRouter()
+const auth    = useAuthStore()
 const loading = useLoadingStore();
 
 const dropdownOpen = ref(false)
@@ -109,31 +123,24 @@ onBeforeUnmount(() => {
 })
 
 async function getById() {
+  dropdownOpen.value = false
   try {
-    // ABRE LOADING
-    loading.show();
-    // REQUISIÇÃO AO ENDPONT
-    const response = await userService.getById(auth.user_id);
-    dataUser.value = response.data.data;
+    loading.show()
+    const response = await userService.getProfile()
+    dataUser.value = response.data.data
+    modal.open(
+      form,
+      { formUpdate: dataUser.value, selfEdit: true },
+      'large',
+      t('labels.edit') + ' ' + t('labels.user'),
+      refreshUser
+    )
   } catch (err) {
-    //NOTIFICATION ERRO
-    alert.show(getErrorMessage(err.response), "error")
-    console.error("Erro :", err);
+    alert.show(getErrorMessage(err.response), 'error')
+    console.error('Erro:', err)
   } finally {
-    // FINALIZA LOADING
-    loading.hide();
-    editUser();
+    loading.hide()
   }
-}
-
-function editUser() {
-  modal.open(
-    form, 
-    {formUpdate : dataUser }, 
-    'large',
-    t('labels.edit')+' '+t('labels.user'),
-    refreshUser
-  )
 }
 
 function refreshUser(){

@@ -2,9 +2,9 @@
   <div class="flex h-screen">
     <!-- Lado Esquerdo -->
     <div class="w-1/2 bg-gradient-to-b from-blue-900 to-blue-800 text-white bg-login flex flex-col items-center justify-center px-10">
-      <img src="/images/logo/logo-white.png" alt="Logo" class="w-24 h-24 mb-6" />
-      <h1 class="text-4xl font-bold mb-2">PHOENIX CLEAN</h1>
-      <p class="text-center text-sm">A 2UP software solution for aircrafts maintenance and operations</p>
+      <img :src="appConfig.logo.auth" alt="Logo" class="mb-6" />
+      <h1 class="text-4xl font-bold mb-2">{{ appConfig.name }}</h1>
+      <p class="text-center text-sm">{{ appConfig.description }}</p>
     </div>
 
     <!-- Lado Direito -->
@@ -85,6 +85,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { appConfig } from '../../config/app'
 import { useRoute } from 'vue-router'
 import { useLoadingStore } from '../../shared/store/loading'
 import { useAlertStore } from '../../shared/store/alert'

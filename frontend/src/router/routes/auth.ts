@@ -2,6 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import Login from '../../views/auth/Login.vue'
 import ForgotPassword from '../../views/auth/ForgotPassword.vue'
 import ResetPassword from '../../views/auth/ResetPassword.vue'
+import Register from '../../views/auth/Register.vue'
 
 const authRoutes: RouteRecordRaw[] = [
   {
@@ -14,6 +15,12 @@ const authRoutes: RouteRecordRaw[] = [
     path: '/',
     name: 'Login',
     component: Login,
+    meta: { requiresGuest: true }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
     meta: { requiresGuest: true }
   },
   {

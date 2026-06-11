@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router'
 import { usePermissions } from '../shared/composables/usePermissions'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faHouse, faUsers, faDatabase, faList, faBoxesPacking,faCircleUser, faListCheck, faMapLocationDot, faChartSimple, faNewspaper, faWineBottle} from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faUsers, faDatabase, faList, faBoxesPacking, faCircleUser, faListCheck, faMapLocationDot, faChartSimple, faNewspaper, faWineBottle, faShip, faCircleQuestion, faClipboardList, faAward } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 library.add([
@@ -19,7 +19,11 @@ library.add([
   faMapLocationDot,
   faChartSimple,
   faNewspaper,
-  faWineBottle
+  faWineBottle,
+  faShip,
+  faCircleQuestion,
+  faClipboardList,
+  faAward,
 ]);
 
 const route   = useRoute();
@@ -94,34 +98,28 @@ const allMenuItems = [
     permission: null,
   },
   {
-    label: 'Clientes',
-    route: 'client',
-    icon: 'fa-solid fa-users',
-    permission: 'client.view',
+    label: t("labels.vessels"),
+    route: 'vessel',
+    icon: 'fa-solid fa-ship',
+    permission: 'vessel.view',
   },
   {
-    label: 'Locais',
-    route: 'place',
-    icon: 'fa-solid fa-map-location-dot',
-    permission: 'place.view',
+    label: t("labels.questions"),
+    route: 'question',
+    icon: 'fa-solid fa-circle-question',
+    permission: 'question.view',
   },
   {
-    label: 'Produtos',
-    route: 'product',
-    icon: 'fa-solid fa-wine-bottle',
-    permission: 'product.view',
+    label: t("labels.certificate_forms"),
+    route: 'certificate-form',
+    icon: 'fa-solid fa-clipboard-list',
+    permission: 'certificate_form.create',
   },
   {
-    label: 'Tarefas',
-    route: 'task',
-    icon: 'fa-solid fa-list-check',
-    permission: 'task.view',
-  },
-  {
-    label: 'Planejamentos',
-    route: 'planning',
-    icon: 'fa-solid fa-newspaper',
-    permission: 'planning.view',
+    label: t("labels.certificates"),
+    route: 'certificates',
+    icon: 'fa-solid fa-award',
+    permission: 'certificates.view',
   },
   {
     label: t("labels.users"),
@@ -146,7 +144,7 @@ const menuItems = computed(() => allMenuItems.filter(item => can(item.permission
         <div
           v-if="!item.children"
           class="hover:bg-gray-300 px-3 py-2 rounded cursor-pointer flex items-center space-x-2"
-          :class="{ 'bg-gray-300 text-gray font-medium': route.name?.startsWith(item.route) }"
+          :class="{ 'bg-gray-300 text-gray font-medium': route.name === item.route || route.name?.startsWith(item.route + '-') || route.name?.startsWith(item.route + '/') }"
         >
           <font-awesome-icon :icon="item.icon" />
           <router-link :to="{name: item.route}" class="block px-3 py-1 rounded cursor-pointer hover:bg-gray-300">

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import authService from "../api/services/auth.service.ts";
+import authService from "../api/services/auth.service";
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
@@ -7,7 +7,7 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: JSON.parse(localStorage.getItem('user')) || null,
     user_id: Number(localStorage.getItem('user_id')) || null,
-    user_photo: Number(localStorage.getItem('user_photo')) || null,
+    user_photo: localStorage.getItem('user_photo') || null,
     token: localStorage.getItem('token') || null,
     permissions: JSON.parse(localStorage.getItem('permissions')) || [],
   }),
@@ -18,7 +18,8 @@ export const useAuthStore = defineStore('auth', {
 
       this.user        = response.data.user
       this.user_id     = response.data.user.id
-      this.user_photo  = import.meta.env.VITE_APP_URL+'storage/profile/'+this.user_id+'/'+response.data.user.user_photo ?? 'images/no-photo.png';
+      const photo = response.data.user.user_photo
+      this.user_photo = photo ? import.meta.env.VITE_APP_URL + 'storage/profile/' + this.user_id + '/' + photo : null
       this.token       = response.data.access_token
       this.permissions = response.data.user.permissions ?? []
 
