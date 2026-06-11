@@ -19,13 +19,14 @@ class RolesAndPermissionsSeeder extends Seeder
             // Anexos
             'attachments.viewAny', 'attachments.view', 'attachments.create', 'attachments.delete',
             //navios
-            'ships.viewAny', 'ships.view', 'ships.create', 'ships.delete',
-            //parametros
-            'certified_parameters.viewAny', 'certified_parameters.view', 'certified_parameters.create', 'certified_parameters.delete',
-            //templapes 
-            'certified_template.viewAny', 'certified_template.view', 'certified_template.create', 'certified_template.delete',
+            'vessel.viewAny', 'vessel.view', 'vessel.create', 'vessel.update', 'vessel.delete',
+            //questões
+            'question.viewAny', 'question.view', 'question.create', 'question.update', 'question.delete',
+            //formulários de certificado
+            'certificate_form.viewAny', 'certificate_form.view', 'certificate_form.create', 'certificate_form.update', 'certificate_form.delete',
             //certificates
-            'certificates.viewAny', 'certificates.view', 'certificates.create',
+            'certificates.viewAny', 'certificates.view', 'certificates.create', 'certificates.delete', 'certificates.approve',
+            'form_response.viewAny', 'form_response.view', 'form_response.create',
         ];
 
         foreach ($permissions as $perm) {
@@ -36,18 +37,20 @@ class RolesAndPermissionsSeeder extends Seeder
         $admin = Role::firstOrCreate(['name' => 'admin']);
         $admin->syncPermissions(Permission::all());
         
-        // Agent 
-        $agent = Role::firstOrCreate(['name' => 'agent']);
-        $agent->syncPermissions([
+        $nonAdminPermissions = [
+            'vessel.viewAny', 'vessel.view', 'vessel.create', 'vessel.update', 'vessel.delete',
+            'certificate_form.viewAny', 'certificate_form.view',
             'certificates.viewAny', 'certificates.view', 'certificates.create',
-        ]);
+            'form_response.viewAny', 'form_response.view', 'form_response.create',
+        ];
 
-        
-        // SHIPOWNER 
+        // Agent
+        $agent = Role::firstOrCreate(['name' => 'agent']);
+        $agent->syncPermissions($nonAdminPermissions);
+
+        // Shipowner
         $shipowner = Role::firstOrCreate(['name' => 'shipowner']);
-        $shipowner->syncPermissions([
-            'certificates.viewAny', 'certificates.view', 'certificates.create',
-        ]);
+        $shipowner->syncPermissions($nonAdminPermissions);
         
 
         /*

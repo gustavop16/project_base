@@ -20,17 +20,16 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'https://phoenix-clean1.websiteseguro.com', 
+        'https://ocean.abilitatech.com.br', 
         'http://localhost:3000', 
         'http://localhost:5173'
     ],
 
     'allowed_origins_patterns' => [],
 
-    //'allowed_headers' => ['*'],
-    'allowed_headers' => ['Authorization', 'Content-Type'],
+    'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['Content-Disposition'],
 
     'max_age' => 0,
 

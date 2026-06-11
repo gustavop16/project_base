@@ -22,14 +22,16 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->user_model->get();
+        $users = $this->user_model->with('vessels:id,name')->get();
         return UserResource::collection($users);
     }
 
     public function store(UserRequest $request)
     {
         $plain = $this->user_service->generatePassword();
-        $input = $this->user_service->prepareData($request->all(), $plain);
+        $input = $this->user_service->prepareData(
+            $request->except('vessel_ids'), $plain
+        );
 
         if ($request->hasFile('photo')) {
             $file           = $this->upload_service->upload('users/', $request->file('photo'));
@@ -38,9 +40,10 @@ class UserController extends Controller
 
         $user = $this->user_model->create($input);
         $user->syncRoles([strtolower($input['type'])]);
+        $user->vessels()->sync($request->vessel_ids ?? []);
         $user->notify(new UserCreatedNotification($plain));
 
-        return new UserResource($user);
+        return new UserResource($user->load('vessels'));
     }
 
     public function show(User $user)
@@ -67,7 +70,32 @@ class UserController extends Controller
             $user->syncRoles([strtolower($input['type'])]);
         }
 
-        return new UserResource($user);
+        if ($request->has('vessel_ids')) {
+            $user->vessels()->sync($request->vessel_ids ?? []);
+        }
+
+        return new UserResource($user->load('vessels'));
+    }
+
+    public function showProfile(Request $request)
+    {
+        return new UserResource($request->user()->load('vessels'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $request->validate([
+            'name'         => 'required|string|max:255',
+            'email'        => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone'        => 'nullable|string|max:20',
+            'observations' => 'nullable|string',
+        ]);
+
+        $user->update($request->only('name', 'email', 'phone', 'observations'));
+
+        return new UserResource($user->load('vessels'));
     }
 
     public function updatePassword(NewPasswordRequest $request, User $user)

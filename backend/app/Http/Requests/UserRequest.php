@@ -29,6 +29,8 @@ class UserRequest extends FormRequest
             ],
             'phone'        => 'nullable|string|max:20',
             'type'         => ['required', Rule::in(array_keys(\App\Models\User::ARR_TYPE))],
+            //'vessel_ids'   => 'required_if:type,AGENT,SHIPOWNER|nullable|array',
+            //'vessel_ids.*' => 'integer|exists:vessels,id',
             'observations' => 'nullable|string',
         ];
     }

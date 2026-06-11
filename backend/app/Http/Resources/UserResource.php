@@ -20,6 +20,9 @@ class UserResource extends JsonResource
             'observations' => $this->observations,
             'photo'        => $this->photo,
             'active'       => $this->active,
+            'vessels' => $this->when($this->relationLoaded('vessels'), fn() =>
+                $this->vessels->map(fn($v) => ['id' => $v->id, 'name' => $v->name])->values()
+            ),
         ];
     }
 }

@@ -14,7 +14,31 @@
       "Bash(Select-Object Path, LineNumber, Line)",
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\Back\" -ErrorAction SilentlyContinue)",
       "Bash(Select-Object Name, FullName)",
-      "Bash(findstr /i \"password\")"
+      "Bash(findstr /i \"password\")",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\app\\\\Http\\\\Controllers\\\\Api\\\\\" -ErrorAction SilentlyContinue | Select-Object Name)",
+      "PowerShell(Test-Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\app\\\\Http\\\\Controllers\\\\Api\\\\\"; Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\app\\\\Http\\\\Controllers\\\\Api\\\\\" 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\database\\\\migrations\\\\\" 2>$null | Where-Object { $_.Name -match \"vessel\" } | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\frontend\\\\src\\\\views\\\\vessel\\\\\" -ErrorAction SilentlyContinue 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\frontend\\\\src\\\\views\\\\question\\\\\" -ErrorAction SilentlyContinue 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\frontend\\\\src\\\\shared\\\\api\\\\services\\\\\" 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\frontend\\\\src\\\\shared\\\\api\\\\models\\\\\" 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\frontend\\\\src\\\\router\\\\routes\\\\\" 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\app\\\\Models\\\\\" 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\database\\\\migrations\\\\\" 2>$null | Where-Object { $_.Name -match \"question\" } | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\app\\\\Http\\\\Controllers\\\\Api\\\\\" 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\app\\\\Http\\\\Requests\\\\\" 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\app\\\\Http\\\\Resources\\\\\" 2>$null | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\backend\\\\database\\\\migrations\\\\\" 2>$null | ForEach-Object { $_.Name } | Sort-Object)",
+      "Bash(mkdir -p \"c:\\\\Users\\\\User\\\\Documents\\\\Abilita\\\\OceanSafer\\\\frontend\\\\src\\\\views\\\\certificate\")",
+      "Bash(xargs -I{} basename {})",
+      "Bash(composer require *)",
+      "Read(//c/Users/User/Documents/Abilita/OceanSafer/frontend/src/**)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\User\\Documents\\Abilita\\OceanSafer\\frontend\\src\\views",
+      "c:\\Users\\User\\Documents\\Abilita\\OceanSafer\\frontend\\src\\shared\\api\\models",
+      "c:\\Users\\User\\Documents\\Abilita\\OceanSafer\\frontend\\src\\shared\\locales",
+      "c:\\Users\\User\\Documents\\Abilita\\OceanSafer\\frontend\\src\\shared\\api\\services"
     ]
   }
 }

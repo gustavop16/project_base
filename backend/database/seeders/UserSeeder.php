@@ -13,25 +13,26 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'name'     => 'Administrador',
-                'email'    => 'admin@oceansafer.com',
+                'email'    => 'admin@aquasat.com',
                 'password' => Hash::make('password'),
                 'type'     => 'admin',
             ],
-           /* [
-                'name'     => 'Gerente',
-                'email'    => 'manager@oceansafer.com',
+            [
+                'name'     => 'agent',
+                'email'    => 'agent@aquasat.com',
                 'password' => Hash::make('password'),
-                'role'     => 'manager',
+                'type'     => 'agent',
             ],
             [
-                'name'     => 'Técnico',
-                'email'    => 'technician@oceansafer.com',
+                'name'     => 'shipowner',
+                'email'    => 'navio@aquasat.com',
                 'password' => Hash::make('password'),
-                'role'     => 'technician',
+                'type'     => 'shipowner',
             ],
+            /*
             [
                 'name'     => 'Cliente',
-                'email'    => 'customer@oceansafer.com',
+                'email'    => 'customer@aquasat.com',
                 'password' => Hash::make('password'),
                 'role'     => 'customer',
             ],*/

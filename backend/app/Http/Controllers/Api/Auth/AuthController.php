@@ -25,6 +25,8 @@ class AuthController extends Controller
             'type'     => 'AGENT',
         ]);
 
+        $user->assignRole('agent');
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([

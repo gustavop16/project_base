@@ -47,6 +47,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function vessels()
+    {
+        return $this->belongsToMany(Vessel::class);
+    }
+
     public function sendPasswordResetNotification($token): void
     {
         $this->notify(new ResetPasswordNotification($token));

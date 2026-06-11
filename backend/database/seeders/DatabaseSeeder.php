@@ -13,7 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesAndPermissionsSeeder::class, // deve rodar antes do UserSeeder
+            VesselSeeder::class,
             UserSeeder::class,
+            BallastWaterQuestionsSeeder::class,
         ]);
     }
 }
